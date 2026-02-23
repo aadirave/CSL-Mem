@@ -4,3 +4,6 @@ output/
 pretrained/
 index/
 analysis_checkpoints/
+.venv/*
+data/
+credentials.json

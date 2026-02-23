@@ -1,6 +1,6 @@
 {
     "log_dir": "./logs",
     "seeds_dir": "./seeds",
-    "data_dir": "",
+    "data_dir": "./data/",
     "model_save_dir": "./pretrained/"
 }
