@@ -52,7 +52,7 @@ def train_phase1():
     model.maxpool = nn.Identity()
     model = model.to(device)
 
-    criterion = nn.CrossEntropyLoss(reduction='none')
+    criterion = nn.CrossEntropyLoss(reduction="none")
     optimizer = optim.SGD(
         model.parameters(), lr=learning_rate, momentum=0.9, weight_decay=5e-4
     )
@@ -93,10 +93,10 @@ def train_phase1():
     print("Phase 1 Complete. Base model saved to ./pretrained/resnet50_base.pt")
 
     os.makedirs("./logs", exist_ok=True)
-    torch.save({
-        'loss_tracker': loss_tracker,
-        'grad_norm_tracker': grad_norm_tracker
-    }, "./logs/tracking_data.pt")
+    torch.save(
+        {"loss_tracker": loss_tracker, "grad_norm_tracker": grad_norm_tracker},
+        "./logs/tracking_data.pt",
+    )
     print("Tracking data saved to ./logs/tracking_data.pt")
 
 
