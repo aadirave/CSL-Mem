@@ -54,7 +54,8 @@ def main():
 
     plt.title('Loss Trajectories over Training')
     plt.xlabel('Epoch')
-    plt.ylabel('Loss')
+    plt.ylabel('Loss (log scale)')
+    plt.yscale('log')
     # Put legend outside to avoid clutter
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
@@ -76,7 +77,8 @@ def main():
 
     plt.title('Input Gradient Norm Trajectories over Training')
     plt.xlabel('Epoch')
-    plt.ylabel('Gradient Norm ||∇x_i ℓ(w_t)||_2')
+    plt.ylabel('Gradient Norm ||∇x_i ℓ(w_t)||_2 (log scale)')
+    plt.yscale('log')
     plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
     plt.tight_layout()
     plt.savefig('./plots/grad_norm_trajectories.png', dpi=300)
