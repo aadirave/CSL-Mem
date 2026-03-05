@@ -1,7 +1,6 @@
 __pycache__
 logs/
 output/
-pretrained/
 index/
 analysis_checkpoints/
 .venv/*
