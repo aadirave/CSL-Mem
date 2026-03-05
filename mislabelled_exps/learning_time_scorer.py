@@ -17,7 +17,7 @@ def main():
     import numpy as np
     import logging
     from tqdm import tqdm
-    from azure_blob_storage import upload_numpy_as_blob, get_model_from_azure_blob_file
+    from minio_obj_storage import get_model_from_minio_blob as get_model_from_azure_blob_file, upload_numpy_as_blob
     import torchopt
     from torchvision import transforms
 

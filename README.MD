@@ -180,7 +180,7 @@ The cross-architecture memory score similarity experiment involves training mode
 To run the cross-architecture experiment, execute the following script:
 
 ```bash
-sh ./scripts/cross_architecture_exps.sh
+sh ./scripts/cross_arch_exps.sh
 ```
 
 This script will:

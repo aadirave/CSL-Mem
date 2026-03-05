@@ -14,7 +14,7 @@ from utils.inference import inference
 from utils.load_dataset import load_dataset
 from utils.averagemeter import AverageMeter
 from utils.instantiate_model import instantiate_model, get_model_name
-from azure_blob_storage import save_to_cloud_loc
+from minio_obj_storage import save_to_cloud as save_to_cloud_loc
 
 
 def train_one_batch(net, data, labels, optimizer, criterion, device):
