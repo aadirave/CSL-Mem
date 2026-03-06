@@ -14,7 +14,7 @@ def main():
     data = torch.load(tracking_file, map_location=device)
     loss_tracker = data["loss_tracker"]
     grad_norm_tracker = data["grad_norm_tracker"]
-    
+
     num_epochs, num_samples = loss_tracker.shape
     print(f"Loaded tracking data for {num_samples} samples over {num_epochs} epochs.")
 
@@ -22,6 +22,10 @@ def main():
 
     cumulative_loss_tracker = torch.cumsum(loss_tracker, dim=0) / epoch_norm
     cumulative_grad_norm_tracker = torch.cumsum(grad_norm_tracker, dim=0) / epoch_norm
+
+    # non-normalized
+    # cumulative_loss_tracker = torch.cumsum(loss_tracker, dim=0)
+    # cumulative_grad_norm_tracker = torch.cumsum(grad_norm_tracker, dim=0)
 
     # Calculate CSG: Sum of squared input gradients over all epochs
     # CSG(z_i) ≈ sum_{t=0}^{Tmax} ||∇x_i ℓ(w_t)||_2^2
