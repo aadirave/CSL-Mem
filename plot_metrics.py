@@ -45,13 +45,12 @@ def main():
     print(f"\nHighest CSG samples (indices): {highest_csg_indices.tolist()}")
     print(f"CSG scores: {sorted_csg[-k:].tolist()}")
 
-    # Ensure plots directory exists
     os.makedirs("./plots", exist_ok=True)
 
-    # 1. Plot Loss Trajectories
+    # plot Loss Trajectories
     plt.figure(figsize=(10, 6))
 
-    # Plot lowest CSG (easy examples)
+    # plot lowest CSG (easy)
     for idx in lowest_csg_indices:
         plt.plot(
             cumulative_loss_tracker[:, idx].numpy(),
@@ -60,7 +59,7 @@ def main():
             label=f"Low CSG (idx {idx})",
         )
 
-    # Plot highest CSG (hard/memorized examples)
+    # plot highest CSG (memorized)
     for idx in highest_csg_indices:
         plt.plot(
             cumulative_loss_tracker[:, idx].numpy(),
@@ -73,16 +72,15 @@ def main():
     plt.xlabel("Epoch")
     plt.ylabel("Cumulative Loss (log scale)")
     plt.yscale("log")
-    # Put legend outside to avoid clutter
     plt.legend(bbox_to_anchor=(1.05, 1), loc="upper left")
     plt.tight_layout()
     plt.savefig("./plots/loss_trajectories.png", dpi=300)
     plt.close()
 
-    # 2. Plot Gradient Norm Trajectories
+    # plot gradient norm trajectories
     plt.figure(figsize=(10, 6))
 
-    # Plot lowest CSG
+    # plot lowest CSG
     for idx in lowest_csg_indices:
         plt.plot(
             cumulative_grad_norm_tracker[:, idx].numpy(),
@@ -91,7 +89,7 @@ def main():
             label=f"Low CSG (idx {idx})",
         )
 
-    # Plot highest CSG
+    # plot highest CSG
     for idx in highest_csg_indices:
         plt.plot(
             cumulative_grad_norm_tracker[:, idx].numpy(),
