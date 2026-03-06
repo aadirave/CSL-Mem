@@ -49,7 +49,7 @@ def main():
     print("Calculating CSG scores...")
     csg_scores = (grad_norm_tracker**2).sum(dim=0)
 
-    k = 5
+    k = 10
     sorted_csg, sorted_indices = torch.sort(csg_scores)
     lowest_csg_indices = sorted_indices[:k]
     highest_csg_indices = sorted_indices[-k:]
@@ -57,7 +57,7 @@ def main():
     os.makedirs("./plots", exist_ok=True)
 
     print("\nVisualizing Lowest CSG Images...")
-    fig_low = plt.figure(figsize=(15, 3))
+    fig_low = plt.figure(figsize=(20, 4))
     for i, idx in enumerate(lowest_csg_indices):
         img, target = trainset[idx.item()]
         img = img * torch.tensor([0.2023, 0.1994, 0.2010]).view(3, 1, 1) + torch.tensor(
@@ -72,7 +72,7 @@ def main():
     plt.close()
 
     print("Visualizing Highest CSG Images...")
-    fig_high = plt.figure(figsize=(15, 3))
+    fig_high = plt.figure(figsize=(20, 4))
     for i, idx in enumerate(highest_csg_indices):
         img, target = trainset[idx.item()]
         img = img * torch.tensor([0.2023, 0.1994, 0.2010]).view(3, 1, 1) + torch.tensor(
