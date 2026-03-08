@@ -24,8 +24,8 @@ def main():
     cumulative_grad_norm_tracker = torch.cumsum(grad_norm_tracker, dim=0) / epoch_norm
 
     # non-normalized
-    # cumulative_loss_tracker = torch.cumsum(loss_tracker, dim=0)
-    # cumulative_grad_norm_tracker = torch.cumsum(grad_norm_tracker, dim=0)
+    cumulative_loss_tracker = torch.cumsum(loss_tracker, dim=0)
+    cumulative_grad_norm_tracker = torch.cumsum(grad_norm_tracker, dim=0)
 
     # Calculate CSG: Sum of squared input gradients over all epochs
     # CSG(z_i) ≈ sum_{t=0}^{Tmax} ||∇x_i ℓ(w_t)||_2^2
