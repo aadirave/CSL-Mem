@@ -7,3 +7,4 @@ analysis_checkpoints/
 .venv/*
 data/
 credentials.json
+.DS_Store

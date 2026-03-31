@@ -30,11 +30,11 @@ def train_phase1():
             transforms.RandomCrop(32, padding=4),
             transforms.RandomHorizontalFlip(),
             transforms.ToTensor(),
-            transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2023, 0.1994, 0.2010)),
+            transforms.Normalize((0.5071, 0.4865, 0.4409), (0.2673, 0.2564, 0.2761)),
         ]
     )
 
-    base_trainset = torchvision.datasets.CIFAR10(
+    base_trainset = torchvision.datasets.CIFAR100(
         root="./data", train=True, download=True, transform=transform_train
     )
     trainset = IndexedDataset(base_trainset)
@@ -46,8 +46,8 @@ def train_phase1():
     loss_tracker = torch.zeros(epochs, num_train_samples)
     grad_norm_tracker = torch.zeros(epochs, num_train_samples)
 
-    # cifar10 images are 32x32
-    model = resnet50(num_classes=10)
+    # cifar100 images are 32x32
+    model = resnet50(num_classes=100)
     model.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
     model.maxpool = nn.Identity()
     model = model.to(device)
