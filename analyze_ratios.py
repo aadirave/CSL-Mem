@@ -22,12 +22,16 @@ def main(args):
 
     cumulative_loss_tracker = torch.cumsum(loss_tracker, dim=0)
 
-    # Adding small epsilon to avoid divide by zero if epoch 15 loss was absolutely 0
-    csl_epoch_15 = cumulative_loss_tracker[14] + 1e-8
-    csl_end = cumulative_loss_tracker[-1]
+    if args.epoch_start < 1 or args.epoch_start > num_epochs or args.epoch_end < 1 or args.epoch_end > num_epochs:
+        print(f"Error: Please specify epochs between 1 and {num_epochs}")
+        return
+
+    # Adding small epsilon to avoid divide by zero if start epoch loss was absolutely 0
+    csl_start = cumulative_loss_tracker[args.epoch_start - 1] + 1e-8
+    csl_end = cumulative_loss_tracker[args.epoch_end - 1]
 
     # Calculate Continuous Ratios
-    ratios = (csl_end / csl_epoch_15).numpy()
+    ratios = (csl_end / csl_start).numpy()
 
     npz_file = args.npz_file
     if os.path.exists(npz_file):
@@ -89,6 +93,8 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Analyze Continuous Ratios and compare with NPZ tracking")
+    parser.add_argument("--epoch_start", type=int, default=15, help="Start epoch for calculating ratio")
+    parser.add_argument("--epoch_end", type=int, default=100, help="End epoch for calculating ratio")
     parser.add_argument("--mem_threshold", type=float, default=0.8, help="Threshold for a tr_mem score to be considered memorized")
     parser.add_argument("--num_bins", type=int, default=10, help="Number of bins to sort the Ratios into for comparison")
     parser.add_argument("--npz_file", type=str, default="./matrices/cifar100_infl_matrix.npz", help="Path to the npz file containing memorization scores")
