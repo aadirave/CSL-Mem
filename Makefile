@@ -10,6 +10,7 @@ FLATTEN_THRESHOLD ?= 0.90
 EPOCH ?= 100
 EPOCH_START ?= 15
 EPOCH_END ?= 100
+ACC = zghodsi
 
 .PHONY: all flattening multiples quartiles ratios plots help
 
@@ -58,3 +59,6 @@ help:
 	@echo "  make ratios EPOCH_START=10 EPOCH_END=50 NUM_BINS=5"
 	@echo "  make flattening FLATTEN_THRESHOLD=0.95"
 	@echo "  make multiples EPOCH=50"
+
+train:
+	sbatch -A $(ACC) --nodes=1 --partition=a30 --mem=16G --gres=gpu:1 -t 2:00:00 aadi-resnet50.sh
