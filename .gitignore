@@ -1,6 +1,5 @@
 __pycache__
 CIFAR10/
-logs/
 output/
 index/
 analysis_checkpoints/
