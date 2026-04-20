@@ -62,3 +62,6 @@ help:
 
 train:
 	sbatch -A $(ACC) --nodes=1 --partition=a30 --mem=16G --gres=gpu:1 -t 2:00:00 aadi-resnet50.sh
+
+train_finetune:
+	sbatch -A $(ACC) --nodes=1 --partition=a30 --mem=16G --gres=gpu:1 -t 2:00:00 aadi-resnet50-finetune.sh
